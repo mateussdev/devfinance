@@ -12,31 +12,19 @@ const Modal = {
   }
 }
 
+const Storage = {
+  get() {
+    return JSON.parse(localStorage.getItem("dev.finance:transactions")) || [];
+  },
+  set(transactions) {
+    localStorage.setItem("dev.finance:transactions", JSON.stringify(transactions));
+  }
+}
+
 // Sum incomes, sum expenses and total
 // Somar as entradas, somas as saídas, e fazer o total
 const Transaction = {
-  all: [
-    {
-      description: 'Luz',
-      amount: -50000,
-      date: '03/04/2022'
-    },
-    {
-      description: 'Website',
-      amount: 500000,
-      date: '03/04/2022'
-    },
-    {
-      description: 'Feira do mês',
-      amount: -100000,
-      date: '03/04/2022'
-    },
-    {
-      description: 'Internet',
-      amount: -9000,
-      date: '03/04/2022'
-    }
-  ],
+  all: Storage.get(),
   add(transaction) {
     Transaction.all.push(transaction)
 
@@ -87,10 +75,11 @@ const DOM = {
   transactionContainer: document.querySelector('#data-table tbody'),
   addTransaction(transaction, index) {
     const tr = document.createElement('tr')
-    tr.innerHTML = DOM.innerHTMLTransaction(transaction)
+    tr.innerHTML = DOM.innerHTMLTransaction(transaction, index)
+    tr.dataset.index = index
     DOM.transactionContainer.appendChild(tr)
   },
-  innerHTMLTransaction(transaction) {
+  innerHTMLTransaction(transaction, index) {
     const CSSClass = transaction.amount > 0 ? 'income' : 'expense'
     const amount = Utils.formatCurrency(transaction.amount)
     const html = `
@@ -98,7 +87,7 @@ const DOM = {
       <td class="${CSSClass}">${amount}</td>
       <td class="date">${transaction.date}</td>
       <td>
-        <img src="assets/minus.svg" alt="Imagem de Remoção">
+        <img onclick="Transaction.remove(${index})" src="assets/minus.svg" alt="Imagem de Remoção">
       </td>
     `
     return html
@@ -179,7 +168,7 @@ const Form = {
     Form.date.value = "";
   },
   submit(event) {
-    event.preventDefault()
+    event.preventDefault();
 
     try {
       // verificar se todas as informações foram preenchidas
@@ -200,11 +189,11 @@ const Form = {
 
 const App = {
   init() {
-    Transaction.all.forEach(transaction => {
-      DOM.addTransaction(transaction)
-    })
+    Transaction.all.forEach(DOM.addTransaction)
 
     DOM.updateBalance()
+
+    Storage.set(Transaction.all);
   },
   reload() {
     DOM.clearTransactions()
