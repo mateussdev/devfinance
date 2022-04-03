@@ -28,7 +28,7 @@ const transactions = [
   {
     id: 3,
     description: 'Feira do mês',
-    amount: 100000,
+    amount: -100000,
     date: '03/04/2022'
   },
   {
@@ -44,12 +44,35 @@ const transactions = [
 const Transaction = {
   incomes() {
     // sum incomes
+    let income = 0;
+    // pegar todas as transações
+    // para cada tranasação
+    transactions.forEach(transaction => {
+      // se ela for maior que zero
+      if(transaction.amount > 0) {
+        // somar a uma variável 
+        income += transaction.amount;
+      }
+    })
+    return income;
   },
   expenses() {
     // sum expenses
+    let expense = 0;
+    // pegar todas transações
+    // para cada transação
+    transactions.forEach(transaction => {
+      // se ela for menor que zero
+      if(transaction.amount < 0){
+        // somar a uma variável
+        expense += transaction.amount;
+      }
+    })
+    return expense;
   },
   total() {
     // total = incomes - expenses
+    return Transaction.incomes() + Transaction.expenses();
   }
 }
 
@@ -74,6 +97,12 @@ const DOM = {
       </td>
     `
     return html
+  },
+  updateBalance() {
+    document.getElementById('incomeDisplay').innerHTML = Utils.formatCurrency(Transaction.incomes());
+    document.getElementById('expenseDisplay').innerHTML = Utils.formatCurrency(Transaction.expenses());
+    document.getElementById('totalDisplay').innerHTML = Utils.formatCurrency(Transaction.total());
+
   }
 }
 
@@ -93,3 +122,5 @@ const Utils = {
 transactions.forEach(function (transaction) {
   DOM.addTransaction(transaction)
 })
+
+DOM.updateBalance()
