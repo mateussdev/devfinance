@@ -1,7 +1,6 @@
-# dev.finance$
-Website created during a Rocketseat Discover content class marathon.
+![Logo of the project](https://github.com/mateussdev/devfinance/blob/master/assets/logo.svg)
 
-Website to track finances, incomes and expenses.
+Website created during a Rocketseat Discover content class marathon, for financial control, incomes and expenses.
 
 ## Technology 
 
