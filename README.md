@@ -34,4 +34,4 @@ Here are the technologies used in this project.
 
 <!-- [![Twitter Badge](https://img.shields.io/badge/-@mateusfps-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/mateusfps)](https://twitter.com/mateusfps)  -->
 [![Linkedin Badge](https://img.shields.io/badge/-mateussdev-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/mateussdev/)](https://www.linkedin.com/in/mateussdev/) 
-<!-- [![Gmail Badge](https://img.shields.io/badge/-contato.mateussdev@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:contato.mateussdev@gmail.com)](mailto:contato.mateussdev@gmail.com) -->'
+<!-- [![Gmail Badge](https://img.shields.io/badge/-contato.mateussdev@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:contato.mateussdev@gmail.com)](mailto:contato.mateussdev@gmail.com) -->
